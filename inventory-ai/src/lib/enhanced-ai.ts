@@ -13,7 +13,18 @@ export interface EnhancedProductAnalysis {
     category: string;
     brand: string;
     model: string;
-    condition: string;
+    colors: string[];
+    size: string;
+    material: string;
+    condition: {
+      grade: string;
+      indicators: string[];
+      score: number;
+    };
+    authenticity: {
+      markers: string[];
+      confidence: number;
+    };
     keyFeatures: string[];
     confidence: number;
   };
@@ -162,7 +173,18 @@ export class EnhancedAIService {
           category: visionAnalysis.category || geminiAnalysis.category,
           brand: visionAnalysis.brand || 'Unknown',
           model: visionAnalysis.model || '',
-          condition: additionalContext?.condition || 'used',
+          colors: visionAnalysis.colors || [],
+          size: visionAnalysis.size || '',
+          material: visionAnalysis.material || '',
+          condition: visionAnalysis.condition || {
+            grade: additionalContext?.condition || 'used',
+            indicators: [],
+            score: 0.7
+          },
+          authenticity: visionAnalysis.authenticity || {
+            markers: [],
+            confidence: 0.5
+          },
           keyFeatures: geminiAnalysis.keyFeatures || [],
           confidence: visionAnalysis.confidence || 0.8
         },
@@ -201,7 +223,7 @@ export class EnhancedAIService {
    * Analyze image using OpenAI Vision
    */
   private async analyzeImageWithVision(imageUrl: string, context?: any): Promise<any> {
-    const prompt = `Analyze this product image and provide detailed identification information. 
+    const prompt = `Analyze this product image and provide comprehensive identification information. 
 
 ${context ? `Additional context: ${JSON.stringify(context)}` : ''}
 
@@ -210,9 +232,18 @@ Please identify:
 2. Brand (if visible)
 3. Model number (if visible)
 4. Category/type
-5. Key features and characteristics
-6. Condition assessment (if determinable)
-7. Notable details or unique identifiers
+5. Color(s) - primary and secondary colors
+6. Size/dimensions (if determinable)
+7. Material/construction
+8. Key features and characteristics
+9. Condition assessment with specific indicators:
+   - New in Package (NIB): Sealed packaging, pristine condition
+   - New: No packaging but unused, no wear
+   - Like New: Minimal to no signs of use
+   - Good: Light wear, fully functional
+   - Acceptable: Moderate wear, may have cosmetic issues
+10. Authenticity markers (logos, serial numbers, quality indicators)
+11. Notable details or unique identifiers
 
 Respond in JSON format:
 {
@@ -220,8 +251,19 @@ Respond in JSON format:
   "brand": "Brand name",
   "model": "Model number",
   "category": "Product category",
+  "colors": ["primary color", "secondary color"],
+  "size": "size/dimensions",
+  "material": "material type",
   "features": ["feature1", "feature2"],
-  "condition": "estimated condition",
+  "condition": {
+    "grade": "condition grade",
+    "indicators": ["wear pattern 1", "condition indicator 2"],
+    "score": 0.85
+  },
+  "authenticity": {
+    "markers": ["logo quality", "serial number"],
+    "confidence": 0.9
+  },
   "confidence": 0.95,
   "details": "Additional observations"
 }`;

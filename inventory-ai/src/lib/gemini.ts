@@ -28,7 +28,7 @@ export class GeminiService {
   private model;
 
   constructor() {
-    this.model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    this.model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
   }
 
   /**
@@ -213,6 +213,64 @@ Respond only with valid JSON array.`;
       console.error('Error generating search queries with Gemini:', error);
       // Fallback to basic queries
       return ['product search query'];
+    }
+  }
+
+  /**
+   * Analyze market trends for pricing strategy
+   */
+  async analyzeMarketTrends(
+    productData: any,
+    marketData: any
+  ): Promise<{
+    direction: 'up' | 'down' | 'stable';
+    confidence: number;
+    factors: string[];
+  }> {
+    const prompt = `
+As a market trend analyst, analyze the following data to determine market trends:
+
+Product Data:
+${JSON.stringify(productData, null, 2)}
+
+Market Data:
+${JSON.stringify(marketData, null, 2)}
+
+Analyze the market trends and provide insights in JSON format:
+{
+  "direction": "up|down|stable",
+  "confidence": 0.85,
+  "factors": ["factor 1", "factor 2", "factor 3"]
+}
+
+Consider:
+1. Price distribution patterns
+2. Listing volume and frequency
+3. Seasonal factors
+4. Category-specific trends
+5. Brand performance
+6. Condition impact on pricing
+
+Respond only with valid JSON.`;
+
+    try {
+      const result = await this.model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+      
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) {
+        throw new Error('No valid JSON found in response');
+      }
+      
+      return JSON.parse(jsonMatch[0]);
+    } catch (error) {
+      console.error('Error analyzing market trends with Gemini:', error);
+      return {
+        direction: 'stable' as const,
+        confidence: 0.5,
+        factors: ['Insufficient data for trend analysis']
+      };
     }
   }
 
