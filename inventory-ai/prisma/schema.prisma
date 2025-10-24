@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  products      Product[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Product {
+  id                String   @id @default(cuid())
+  userId            String
+  title             String
+  description       String?
+  tags              String?  // JSON string array
+  condition         String   // new, used, refurbished, etc.
+  category          String?
+  brand             String?
+  model             String?
+  weight            Float?   // in grams
+  dimensions        String?  // JSON string for length, width, height
+  originalPrice     Float?
+  recommendedPrice  Float?
+  currentMarketPrice Float?
+  imageUrl          String?
+  imagePublicId     String?  // For Cloudinary or similar
+  aiIdentification  String?  // JSON string with AI analysis results
+  aiAnalysis        String?  // JSON string with combined AI analysis
+  ebayData          String?  // JSON string with scraped eBay data
+  googleShoppingData String? // JSON string with Google Shopping data
+  marketAnalysis    String?  // JSON string with compiled market analysis
+  shopifyProductId  String?  // If synced to Shopify
+  shopifyStatus     String?  // draft, active, archived
+  status            String   @default("draft") // draft, analyzing, ready, listed
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comparableListings ComparableListing[]
+  scrapedData       ScrapedData[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([category])
+}
+
+model ComparableListing {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  platform    String   // "ebay", "google_shopping", etc.
+  title       String
+  price       Float?
+  condition   String?
+  url         String
+  imageUrl    String?
+  seller      String?
+  shipping    Float?
+  location    String?
+  similarity  Float?   // AI-calculated similarity score
+  listingDate DateTime?
+  soldDate    DateTime?
+  isSold      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([productId])
+  @@index([platform])
+  @@index([similarity])
+  @@map("comparable_listings")
+}
+
+model ScrapedData {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  platform    String   // "ebay", "google_shopping"
+  query       String   // Search query used
+  rawData     String   // JSON string of raw scraped data
+  processedAt DateTime @default(now())
+  actorRunId  String?  // Apify actor run ID for reference
+  status      String   @default("completed") // pending, completed, failed
+
+  @@index([productId])
+  @@index([platform])
+  @@map("scraped_data")
+}
