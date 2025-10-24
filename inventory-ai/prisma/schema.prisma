@@ -92,6 +92,7 @@ model Product {
   ebayId            String?  // eBay listing ID
   ebayStatus        String?  // eBay listing status
   listedAt          DateTime? // When first listed
+  geminiAnalysis    String?  // JSON string with Gemini analysis results
   status            String   @default("received") // received, photographed, priced, listed, sold
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
