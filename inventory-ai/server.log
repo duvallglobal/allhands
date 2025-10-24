@@ -268,3 +268,690 @@ Require stack:
  GET / 200 in 69ms
  ✓ Compiled in 735ms (1103 modules)
  GET / 200 in 150ms
+ GET / 200 in 105ms
+ ✓ Compiled /_not-found in 159ms (1092 modules)
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/_not-found/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:198:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/_not-found/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:198:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/_not-found/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:198:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/_not-found/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:198:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/_not-found/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:198:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/_not-found/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:198:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ✓ Compiled /_error in 148ms (1094 modules)
+ GET /_next/static/chunks/app-pages-internals.js 500 in 5892ms
+ GET /_next/static/chunks/webpack.js?v=1761312417441 500 in 5899ms
+ GET /_next/static/chunks/app/layout.js 500 in 5893ms
+ GET /_next/static/css/app/layout.css?v=1761312417441 500 in 5902ms
+ GET /_next/static/chunks/app/page.js 500 in 5892ms
+ GET /_next/static/chunks/main-app.js?v=1761312417441 500 in 5894ms
+ ○ Compiling /gemini-demo ...
+ ✓ Compiled /gemini-demo in 933ms (1248 modules)
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/gemini-demo/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:203:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /_next/static/css/app/layout.css?v=1761312430364 500 in 87ms
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/gemini-demo/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:203:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/gemini-demo/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:203:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ ⨯ Error: Cannot find module './989.js'
+Require stack:
+- /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+- /workspace/project/inventory-ai/.next/server/app/gemini-demo/page.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/options.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/swc/index.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/parse-module.js
+- /workspace/project/inventory-ai/node_modules/next/dist/build/analysis/get-page-static-info.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/router-server.js
+- /workspace/project/inventory-ai/node_modules/next/dist/server/lib/start-server.js
+    at call (node_modules/next/src/server/require-hook.ts:51:33)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at __webpack_require__.f.require (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:203:28)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:111:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/workspace/project/inventory-ai/.next/server/webpack-runtime.js:162:22)
+    at <unknown> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3492)
+    at Object.<anonymous> (/workspace/project/inventory-ai/.next/server/app/_not-found/page.js:1:3538)
+    at call (node_modules/next/src/server/require-hook.ts:70:25)
+    at require (node_modules/next/src/server/require.ts:121:8)
+    at page (node_modules/next/src/server/load-components.ts:189:41)
+    at async DevServer.findPageComponentsImpl (node_modules/next/src/server/next-server.ts:779:27)
+    at async DevServer.findPageComponents (node_modules/next/src/server/dev/next-dev-server.ts:881:13)
+    at async DevServer.renderErrorToResponseImpl (node_modules/next/src/server/base-server.ts:3866:19)
+    at async pipe.req.req (node_modules/next/src/server/base-server.ts:3818:25)
+    at async DevServer.pipeImpl (node_modules/next/src/server/base-server.ts:1698:20)
+    at async (node_modules/next/src/server/dev/next-dev-server.ts:514:13)
+    at async Span.traceAsyncFn (node_modules/next/src/trace/trace.ts:143:13)
+    at async DevServer.handleRequest (node_modules/next/src/server/dev/next-dev-server.ts:512:19)
+    at async invokeRender (node_modules/next/src/server/lib/router-server.ts:284:10)
+    at async handleRequest (node_modules/next/src/server/lib/router-server.ts:560:15)
+    at async requestHandlerImpl (node_modules/next/src/server/lib/router-server.ts:576:6)
+    at async Server.requestListener (node_modules/next/src/server/lib/start-server.ts:146:6) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [Array]
+}
+ GET /_next/static/chunks/main-app.js?v=1761312430364 500 in 87ms
+ GET /_next/static/chunks/app-pages-internals.js 500 in 87ms
+ GET /_next/static/chunks/app/layout.js 500 in 86ms
+ GET /gemini-demo 200 in 1311ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/workspace/project/inventory-ai/.next/cache/webpack/client-development-fallback/0.pack.gz'
+ GET / 200 in 55ms
+ GET / 200 in 23ms
+ GET / 200 in 21ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/workspace/project/inventory-ai/.next/server/vendor-chunks/attr-accept.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/attr-accept' in /workspace/project/inventory-ai/.next/server for build dependencies doesn't lead to expected result '/workspace/project/inventory-ai/.next/server/vendor-chunks/attr-accept.js', but to 'Error: Can't resolve './vendor-chunks/attr-accept' in '/workspace/project/inventory-ai/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/attr-accept (expected /workspace/project/inventory-ai/.next/server/vendor-chunks/attr-accept.js)
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/object-assign' in /workspace/project/inventory-ai/.next/server for build dependencies doesn't lead to expected result '/workspace/project/inventory-ai/.next/server/vendor-chunks/object-assign.js', but to 'Error: Can't resolve './vendor-chunks/object-assign' in '/workspace/project/inventory-ai/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/object-assign (expected /workspace/project/inventory-ai/.next/server/vendor-chunks/object-assign.js)
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+ GET / 200 in 17ms
+ GET / 200 in 14ms
+ GET / 200 in 19ms
+ GET / 200 in 21ms
+ GET / 200 in 15ms
+ GET / 200 in 14ms
+ GET / 200 in 15ms
+ GET / 200 in 20ms
+ GET / 200 in 17ms
+ GET / 200 in 13ms
+ GET / 200 in 13ms
+ GET / 200 in 18ms
+ GET / 200 in 23ms
+ GET / 200 in 20ms
+ GET / 200 in 18ms
+ GET / 200 in 19ms
+ GET / 200 in 19ms
+ GET / 200 in 19ms
+ GET / 200 in 20ms
+ GET / 200 in 19ms
+ GET / 200 in 21ms
+ GET / 200 in 19ms
+ GET / 200 in 20ms
+ GET / 200 in 18ms
+ GET / 200 in 18ms
+ GET / 200 in 21ms
+ GET / 200 in 18ms
+ GET / 200 in 21ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+ GET / 200 in 17ms
+ GET / 200 in 17ms
+ ✓ Compiled in 369ms (680 modules)
+ GET / 200 in 16ms
+ GET / 200 in 14ms
+ GET / 200 in 24ms
+ GET / 200 in 14ms
+ ✓ Compiled in 132ms (680 modules)
+ GET / 200 in 14ms
+ GET / 200 in 14ms
+ GET / 200 in 13ms
+ GET / 200 in 17ms
+ GET / 200 in 13ms
+ GET / 200 in 12ms
+ GET / 200 in 13ms
+ GET / 200 in 18ms
+ GET / 200 in 12ms
+ GET / 200 in 15ms
+ GET / 200 in 13ms
+ GET / 200 in 13ms
+ GET / 200 in 21ms
+ GET / 200 in 22ms
+ GET / 200 in 20ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+ ✓ Compiled in 138ms (680 modules)
+ GET / 200 in 14ms
+ GET / 200 in 15ms
+ GET / 200 in 13ms
+ GET / 200 in 16ms
+ GET / 200 in 13ms
+ GET / 200 in 19ms
+ GET / 200 in 14ms
+ GET / 200 in 13ms
+ GET / 200 in 16ms
+ GET / 200 in 14ms
+ GET / 200 in 22ms
+ GET / 200 in 20ms
+ GET / 200 in 17ms
+ GET / 200 in 17ms
+ GET / 200 in 18ms
+ GET / 200 in 20ms
+ GET / 200 in 20ms
+ ✓ Compiled in 141ms (680 modules)
+ GET / 200 in 13ms
+ GET / 200 in 16ms
+ GET / 200 in 12ms
+ GET / 200 in 16ms
+ GET / 200 in 13ms
+ GET / 200 in 13ms
+ GET / 200 in 22ms
+ GET / 200 in 18ms
+ GET / 200 in 19ms
+ ✓ Compiled in 117ms (680 modules)
+ GET / 200 in 17ms
+ GET / 200 in 13ms
+ ✓ Compiled in 115ms (680 modules)
+ GET / 200 in 17ms
+ GET / 200 in 12ms
+ GET / 200 in 12ms
+ GET / 200 in 13ms
+ GET / 200 in 17ms
+ GET / 200 in 13ms
+ GET / 200 in 12ms
+ GET / 200 in 15ms
+ GET / 200 in 19ms
+ GET / 200 in 13ms
+ GET / 200 in 14ms
+ GET / 200 in 13ms
+ GET / 200 in 12ms
+ GET / 200 in 31ms
+ ✓ Compiled in 123ms (680 modules)
+ GET / 200 in 16ms
+ GET / 200 in 13ms
+ GET / 200 in 15ms
+ GET / 200 in 15ms
+ GET / 200 in 14ms
+ GET / 200 in 13ms
+ GET / 200 in 15ms
+ GET / 200 in 13ms
+ GET / 200 in 15ms
+ ✓ Compiled in 127ms (680 modules)
+ ✓ Compiled in 571ms (1155 modules)
+ GET / 200 in 127ms
+ GET / 200 in 13ms
+ GET / 200 in 13ms
+ GET / 200 in 17ms
+ GET / 200 in 14ms
+ GET / 200 in 13ms
+ GET / 200 in 14ms
+ GET / 200 in 16ms
+ GET / 200 in 15ms
+ GET / 200 in 14ms
+ GET / 200 in 13ms
+ GET / 200 in 12ms
+ GET / 200 in 21ms
+ GET / 200 in 16ms
+ GET / 200 in 20ms
+ GET / 200 in 19ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/workspace/project/inventory-ai/.next/server/vendor-chunks/attr-accept.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/attr-accept' in /workspace/project/inventory-ai/.next/server for build dependencies doesn't lead to expected result '/workspace/project/inventory-ai/.next/server/vendor-chunks/attr-accept.js', but to 'Error: Can't resolve './vendor-chunks/attr-accept' in '/workspace/project/inventory-ai/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/attr-accept (expected /workspace/project/inventory-ai/.next/server/vendor-chunks/attr-accept.js)
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/object-assign' in /workspace/project/inventory-ai/.next/server for build dependencies doesn't lead to expected result '/workspace/project/inventory-ai/.next/server/vendor-chunks/object-assign.js', but to 'Error: Can't resolve './vendor-chunks/object-assign' in '/workspace/project/inventory-ai/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/object-assign (expected /workspace/project/inventory-ai/.next/server/vendor-chunks/object-assign.js)
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file /workspace/project/inventory-ai/.next/server/webpack-runtime.js
+<w>  at file dependencies /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file /workspace/project/inventory-ai/.next/server/app/page.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/require.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /workspace/project/inventory-ai/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+ GET / 200 in 15ms
+ GET / 200 in 15ms
+ GET / 200 in 14ms
+ GET / 200 in 12ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+ GET / 200 in 18ms
+ GET / 200 in 17ms
+ GET / 200 in 18ms
+ GET / 200 in 18ms
+ GET / 200 in 17ms
+ GET / 200 in 17ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+ GET / 200 in 22ms
+ GET / 200 in 17ms
+ GET / 200 in 21ms
+ GET / 200 in 18ms
+ GET / 200 in 18ms
+ GET / 200 in 21ms
+ GET / 200 in 24ms
+ GET / 200 in 18ms
+ GET / 200 in 18ms
+ GET / 200 in 17ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+ GET / 200 in 17ms
+ GET / 200 in 17ms
+ GET / 200 in 16ms
+ GET / 200 in 19ms
+ GET / 200 in 17ms
+ GET / 200 in 18ms
+ GET / 200 in 16ms
+ GET / 200 in 17ms
+ GET / 200 in 16ms
+ GET / 200 in 16ms
+ GET / 200 in 22ms
+ GET / 200 in 17ms
+ GET / 200 in 16ms
+ GET / 200 in 19ms
+ GET / 200 in 21ms
+ GET / 200 in 18ms
+ GET / 200 in 19ms
+ GET / 200 in 18ms
+ GET / 200 in 17ms
+ GET / 200 in 17ms
+ GET / 200 in 19ms
+ GET / 200 in 16ms
+ GET / 200 in 17ms
+ GET / 200 in 19ms

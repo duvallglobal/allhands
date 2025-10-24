@@ -23,6 +23,62 @@ export interface GeminiAnalysis {
   keyFeatures: string[];
   targetAudience: string[];
   competitiveAdvantages: string[];
+  
+  shippingWeight: {
+    pounds: number;
+    kilograms: number;
+    estimationMethod: string;
+  };
+  
+  dimensions: {
+    length: number;
+    width: number;
+    height: number;
+    unit: string;
+    lengthCm: number;
+    widthCm: number;
+    heightCm: number;
+  };
+  
+  platformCategories: {
+    ebay: {
+      primaryCategory: string;
+      primaryCategoryName: string;
+      secondaryCategory?: string;
+      secondaryCategoryName?: string;
+      categoryPath: string;
+    };
+    facebook: {
+      category: string;
+      subcategory: string;
+      categoryId: string;
+    };
+    shopify: {
+      productType: string;
+      vendor: string;
+      collection: string;
+    };
+  };
+  
+  seoKeywords: {
+    primary: string[];
+    secondary: string[];
+    longtail: string[];
+  };
+  
+  shopifyMetafields: Array<{
+    namespace: string;
+    key: string;
+    value: string;
+    type: string;
+  }>;
+  
+  inventoryData: {
+    fragility: number;
+    storageRequirements: string;
+    handlingInstructions: string;
+    insuranceValue: number;
+  };
 }
 
 export interface PriceAnalysis {
@@ -41,12 +97,12 @@ export class GeminiService {
 
   constructor() {
     // Use gemini-flash-latest for text analysis and search
-    this.textModel = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
-    // Use gemini-2.5-flash-image for image analysis
-    this.imageModel = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    this.textModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+    // Use gemini-flash-latest for image analysis
+    this.imageModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
     // Use search-enabled model for market research
     this.searchModel = genAI.getGenerativeModel({ 
-      model: 'gemini-2.0-flash-exp',
+      model: 'gemini-flash-latest',
       tools: [searchTool]
     });
   }
@@ -56,16 +112,39 @@ export class GeminiService {
    */
   async analyzeProductImage(imageUrl: string, prompt?: string): Promise<any> {
     const defaultPrompt = `
-    Analyze this product image and provide detailed information:
-    1. Product identification (brand, model, type)
-    2. Condition assessment
-    3. Key features and specifications visible
-    4. Material and build quality indicators
-    5. Authenticity markers
-    6. Estimated age/generation
-    7. Notable defects or wear patterns
+    Analyze this product image and provide comprehensive inventory management data:
     
-    Format as structured JSON.
+    REQUIRED FIELDS:
+    1. Product identification (brand, model, type, SKU if visible)
+    2. Condition assessment with grade (A-F) and detailed notes
+    3. Shipping weight estimation (in lbs and kg) based on size and material
+    4. Dimensions estimation (length x width x height in inches and cm)
+    5. Material composition and build quality indicators
+    6. Authenticity markers and verification points
+    7. Estimated age/generation and manufacturing details
+    8. Notable defects, wear patterns, or damage
+    
+    PLATFORM-SPECIFIC CATEGORIES:
+    9. eBay category suggestions (primary and secondary)
+    10. Facebook Marketplace category recommendations
+    11. Shopify product type and vendor classification
+    
+    SEO & MARKETING DATA:
+    12. SEO-optimized title (60 chars max)
+    13. Meta description (160 chars max)
+    14. SEO tags/keywords (10-15 relevant terms)
+    15. Shopify metafields (custom fields for enhanced data)
+    16. Key selling points and features
+    17. Target audience demographics
+    18. Competitive advantages
+    
+    INVENTORY MANAGEMENT:
+    19. Recommended storage conditions
+    20. Fragility rating (1-10)
+    21. Special handling requirements
+    22. Insurance value estimation
+    
+    Format as structured JSON with all fields populated.
     `;
 
     try {
@@ -202,7 +281,7 @@ export class GeminiService {
     }
 
     const prompt = `
-As an expert e-commerce product analyst with access to current market data, analyze the following product and generate comprehensive, SEO-optimized content:
+As an expert e-commerce product analyst with access to current market data, analyze the following product and generate comprehensive inventory management data with SEO optimization and platform-specific categories:
 
 Product Information:
 - Title: ${productData.title || 'Unknown'}
@@ -217,7 +296,7 @@ ${enhancedMarketData ? JSON.stringify(enhancedMarketData, null, 2) : 'No market 
 
 Search for additional current market trends and competitor analysis for this product type to enhance your recommendations.
 
-Please provide a JSON response with the following structure:
+Please provide a JSON response with the following COMPLETE structure:
 {
   "title": "Optimized product title (60-80 characters, include key features and brand)",
   "description": "Detailed product description (150-300 words, highlight benefits and features)",
@@ -228,18 +307,94 @@ Please provide a JSON response with the following structure:
   "marketingCopy": "Compelling marketing copy that sells the product (100-200 words)",
   "keyFeatures": ["list", "of", "key", "product", "features"],
   "targetAudience": ["primary", "target", "audience", "segments"],
-  "competitiveAdvantages": ["unique", "selling", "points", "vs", "competitors"]
+  "competitiveAdvantages": ["unique", "selling", "points", "vs", "competitors"],
+  
+  "shippingWeight": {
+    "pounds": 2.5,
+    "kilograms": 1.13,
+    "estimationMethod": "Based on product type and materials"
+  },
+  
+  "dimensions": {
+    "length": 12,
+    "width": 8,
+    "height": 3,
+    "unit": "inches",
+    "lengthCm": 30.5,
+    "widthCm": 20.3,
+    "heightCm": 7.6
+  },
+  
+  "platformCategories": {
+    "ebay": {
+      "primaryCategory": "9355",
+      "primaryCategoryName": "Cell Phones & Smartphones",
+      "secondaryCategory": "20349",
+      "secondaryCategoryName": "Cell Phone Accessories",
+      "categoryPath": "Cell Phones & Accessories > Cell Phones & Smartphones"
+    },
+    "facebook": {
+      "category": "Electronics",
+      "subcategory": "Mobile Phones",
+      "categoryId": "electronics_mobile_phones"
+    },
+    "shopify": {
+      "productType": "Electronics - Mobile Devices",
+      "vendor": "Brand Name",
+      "collection": "Smartphones"
+    }
+  },
+  
+  "seoKeywords": {
+    "primary": ["smartphone", "mobile phone", "unlocked phone"],
+    "secondary": ["android phone", "dual sim", "camera phone"],
+    "longtail": ["unlocked android smartphone dual camera", "budget friendly mobile phone"]
+  },
+  
+  "shopifyMetafields": [
+    {
+      "namespace": "inventory",
+      "key": "condition_grade",
+      "value": "B+",
+      "type": "single_line_text_field"
+    },
+    {
+      "namespace": "inventory", 
+      "key": "authenticity_verified",
+      "value": "true",
+      "type": "boolean"
+    },
+    {
+      "namespace": "seo",
+      "key": "focus_keywords",
+      "value": "smartphone, unlocked, android",
+      "type": "single_line_text_field"
+    },
+    {
+      "namespace": "platforms",
+      "key": "ebay_category",
+      "value": "9355",
+      "type": "single_line_text_field"
+    }
+  ],
+  
+  "inventoryData": {
+    "fragility": 7,
+    "storageRequirements": "Keep in dry, temperature-controlled environment",
+    "handlingInstructions": "Handle with care, avoid drops",
+    "insuranceValue": 250
+  }
 }
 
-Focus on:
-1. SEO optimization with relevant keywords
-2. Compelling, benefit-focused copy
-3. Clear value proposition
-4. Professional, trustworthy tone
-5. Accurate categorization
-6. Market-relevant positioning
+CRITICAL REQUIREMENTS:
+1. MUST include accurate shipping weight estimation in both pounds and kilograms
+2. MUST provide platform-specific categories for eBay, Facebook, and Shopify
+3. MUST include comprehensive SEO keywords (primary, secondary, longtail)
+4. MUST generate Shopify metafields for inventory management
+5. MUST estimate realistic dimensions based on product type
+6. Focus on Shopify as the source of truth for inventory data
 
-Respond only with valid JSON.`;
+Respond only with valid JSON containing ALL required fields.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
