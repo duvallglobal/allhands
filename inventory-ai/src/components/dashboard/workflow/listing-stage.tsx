@@ -35,7 +35,7 @@ interface Product {
 interface ListingStageProps {
   products: Product[]
   onProductUpdate: (productId: string, updates: Partial<Product>) => Promise<void>
-  onStageComplete: (productId: string, nextStatus: string) => Promise<void>
+  onStageComplete: (productId: string, nextStatus: Product['status']) => Promise<void>
 }
 
 export function ListingStage({ products, onProductUpdate, onStageComplete }: ListingStageProps) {

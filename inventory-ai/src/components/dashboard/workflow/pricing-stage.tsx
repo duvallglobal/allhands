@@ -41,7 +41,7 @@ interface Product {
 interface PricingStageProps {
   products: Product[]
   onProductUpdate: (productId: string, updates: Partial<Product>) => Promise<void>
-  onStageComplete: (productId: string, nextStatus: string) => Promise<void>
+  onStageComplete: (productId: string, nextStatus: Product['status']) => Promise<void>
 }
 
 export function PricingStage({ products, onProductUpdate, onStageComplete }: PricingStageProps) {

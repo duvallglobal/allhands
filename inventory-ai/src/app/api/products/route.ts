@@ -96,7 +96,6 @@ export async function POST(request: NextRequest) {
         brand,
         model,
         tags,
-        price: price ? parseFloat(price) : null,
         weight,
         dimensions,
         imageUrl,

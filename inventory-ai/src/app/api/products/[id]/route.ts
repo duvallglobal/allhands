@@ -107,7 +107,6 @@ export async function PUT(
         brand,
         model,
         tags,
-        price: price ? parseFloat(price) : null,
         weight,
         dimensions,
         status,

@@ -5,10 +5,11 @@ import { apifyService } from '@/lib/apify'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id: productId } = await context.params;
+
   try {
-    const productId = params.id
 
     // Get product from database
     const product = await prisma.product.findUnique({
@@ -30,12 +31,9 @@ export async function POST(
         product.condition
       ),
       
-      // eBay data (existing)
-      apifyService.searchEbay({
-        query: product.title,
-        category: product.category || undefined,
-        condition: product.condition,
-        maxResults: 50
+      // eBay data - use getMarketData instead
+      apifyService.getMarketData(product.title, {
+        maxItemsPerPlatform: 50
       })
     ])
 
@@ -76,7 +74,7 @@ export async function POST(
       where: { id: productId },
       data: {
         marketAnalysis: JSON.stringify(marketAnalysis),
-        pricingData: JSON.stringify(pricingInsights),
+        // Store pricing insights within marketAnalysis
         updatedAt: new Date()
       }
     })

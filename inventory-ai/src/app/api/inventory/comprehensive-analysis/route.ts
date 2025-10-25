@@ -194,10 +194,11 @@ export async function POST(request: NextRequest) {
     // Step 8: SEO Content Generation
     console.log('🎯 Generating SEO content...');
     try {
-      results.data.seoContent = await geminiService.generateSEOContent(productName, {
+      results.data.seoContent = await geminiService.generateSEOContent({
+        title: productName,
         brand: brand,
         category: validatedData.category,
-        targetKeywords: results.data.geminiAnalysis?.seoKeywords?.primary || [],
+        seoKeywords: results.data.geminiAnalysis?.seoKeywords,
       });
     } catch (error) {
       console.error('SEO content generation failed:', error);
@@ -207,11 +208,11 @@ export async function POST(request: NextRequest) {
     // Step 9: Competitor Research
     console.log('🕵️ Conducting competitor research...');
     try {
-      results.data.competitorResearch = await geminiService.researchCompetitors(productName, {
+      results.data.competitorResearch = await geminiService.researchCompetitors({
+        title: productName,
         brand: brand,
         category: validatedData.category,
-        platforms: ['ebay', 'amazon', 'facebook'],
-      });
+      }, ['ebay', 'amazon', 'facebook']);
     } catch (error) {
       console.error('Competitor research failed:', error);
       results.data.competitorResearch = { error: 'Failed to conduct competitor research' };

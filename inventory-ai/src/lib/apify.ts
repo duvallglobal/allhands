@@ -33,7 +33,7 @@ export interface GoogleShoppingResult {
 }
 
 export class ApifyService {
-  private client: ApifyApi;
+  private client: typeof apifyClient;
 
   constructor() {
     this.client = apifyClient;

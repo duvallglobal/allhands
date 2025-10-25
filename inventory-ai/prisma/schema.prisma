@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -43,6 +43,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  // New field for credentials auth
+  passwordHash  String?
   accounts      Account[]
   sessions      Session[]
   products      Product[]
@@ -68,32 +70,26 @@ model Product {
   category          String?
   brand             String?
   model             String?
-  colors            String?  // JSON string array of colors
-  size              String?  // Size/dimensions as string
-  material          String?  // Material/construction type
   weight            Float?   // in grams
   dimensions        String?  // JSON string for length, width, height
-  price             Float?   // Current/recommended price
+  price             Float?   // Current/listed price
   originalPrice     Float?
   recommendedPrice  Float?
   currentMarketPrice Float?
   imageUrl          String?
-  additionalImages  String?  // JSON string array of additional image URLs
   imagePublicId     String?  // For Cloudinary or similar
-  sku               String?  // Generated SKU
   aiIdentification  String?  // JSON string with AI analysis results
   aiAnalysis        String?  // JSON string with combined AI analysis
+  geminiAnalysis    String?  // JSON string with Gemini-specific analysis
   pricingData       String?  // JSON string with pricing analysis
+  colors            String?  // JSON string array of colors
+  size              String?  // Size information
   ebayData          String?  // JSON string with scraped eBay data
   googleShoppingData String? // JSON string with Google Shopping data
   marketAnalysis    String?  // JSON string with compiled market analysis
   shopifyProductId  String?  // If synced to Shopify
   shopifyStatus     String?  // draft, active, archived
-  ebayId            String?  // eBay listing ID
-  ebayStatus        String?  // eBay listing status
-  listedAt          DateTime? // When first listed
-  geminiAnalysis    String?  // JSON string with Gemini analysis results
-  status            String   @default("received") // received, photographed, priced, listed, sold
+  status            String   @default("draft") // draft, received, photographed, priced, listed, sold
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
@@ -104,7 +100,6 @@ model Product {
   @@index([userId])
   @@index([status])
   @@index([category])
-  @@index([sku])
 }
 
 model ComparableListing {
@@ -140,6 +135,7 @@ model ScrapedData {
   query       String   // Search query used
   rawData     String   // JSON string of raw scraped data
   processedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
   actorRunId  String?  // Apify actor run ID for reference
   status      String   @default("completed") // pending, completed, failed
 

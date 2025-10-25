@@ -93,7 +93,11 @@ export class EnhancedAIService {
       const marketDataResults = await Promise.allSettled(marketDataPromises);
       
       // Combine successful results
-      const combinedMarketData = {
+      const combinedMarketData: {
+        ebay: any[];
+        googleShopping: any[];
+        summary: { totalListings: number; averagePrice: number; priceRange: { min: number; max: number }; platforms: string[] };
+      } = {
         ebay: [],
         googleShopping: [],
         summary: { totalListings: 0, averagePrice: 0, priceRange: { min: 0, max: 0 }, platforms: [] }
@@ -108,8 +112,8 @@ export class EnhancedAIService {
 
       // Recalculate summary
       const allPrices = [
-        ...combinedMarketData.ebay.map(item => item.price).filter(p => p > 0),
-        ...combinedMarketData.googleShopping.map(item => item.price).filter(p => p > 0)
+        ...combinedMarketData.ebay.map((item: any) => item.price).filter((p: number) => p > 0),
+        ...combinedMarketData.googleShopping.map((item: any) => item.price).filter((p: number) => p > 0)
       ];
 
       if (allPrices.length > 0) {

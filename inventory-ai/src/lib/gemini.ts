@@ -1,16 +1,29 @@
-import { GoogleGenerativeAI, Tool } from '@google/generative-ai';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
-// Define tools for grounded search and URL context
-const searchTool: Tool = {
-  googleSearchRetrieval: {
-    dynamicRetrievalConfig: {
-      mode: 'MODE_DYNAMIC',
-      dynamicThreshold: 0.7
-    }
-  }
-};
+// Define tools for grounded search with Google Search
+// Note: The Tool type in v0.24.1 doesn't include googleSearch, but the API supports it
+// This will work at runtime, we just need to bypass the type check
+const searchTool = {
+  googleSearch: {},
+} as const;
+
+// Type definitions for product analysis
+export interface ProductAnalysis {
+  analysis?: string;
+  [key: string]: unknown;
+}
+
+export interface MarketData {
+  marketData?: string;
+  [key: string]: unknown;
+}
+
+export interface AIIdentification {
+  [key: string]: unknown;
+}
 
 export interface GeminiAnalysis {
   title: string;
@@ -23,13 +36,13 @@ export interface GeminiAnalysis {
   keyFeatures: string[];
   targetAudience: string[];
   competitiveAdvantages: string[];
-  
+
   shippingWeight: {
     pounds: number;
     kilograms: number;
     estimationMethod: string;
   };
-  
+
   dimensions: {
     length: number;
     width: number;
@@ -39,7 +52,7 @@ export interface GeminiAnalysis {
     widthCm: number;
     heightCm: number;
   };
-  
+
   platformCategories: {
     ebay: {
       primaryCategory: string;
@@ -59,20 +72,20 @@ export interface GeminiAnalysis {
       collection: string;
     };
   };
-  
+
   seoKeywords: {
     primary: string[];
     secondary: string[];
     longtail: string[];
   };
-  
+
   shopifyMetafields: Array<{
     namespace: string;
     key: string;
     value: string;
     type: string;
   }>;
-  
+
   inventoryData: {
     fragility: number;
     storageRequirements: string;
@@ -85,32 +98,37 @@ export interface PriceAnalysis {
   recommendedPrice: number;
   priceRange: { min: number; max: number };
   reasoning: string;
-  marketPosition: 'budget' | 'mid-range' | 'premium';
+  marketPosition: "budget" | "mid-range" | "premium";
   competitiveAnalysis: string;
   pricingStrategy: string;
 }
 
 export class GeminiService {
-  private textModel;
-  private imageModel;
-  private searchModel;
+  private readonly textModel;
+  private readonly imageModel;
+  private readonly searchModel;
 
   constructor() {
     // Use gemini-flash-latest for text analysis and search
-    this.textModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+    this.textModel = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
     // Use gemini-flash-latest for image analysis
-    this.imageModel = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
+    this.imageModel = genAI.getGenerativeModel({
+      model: "gemini-flash-latest",
+    });
     // Use search-enabled model for market research
-    this.searchModel = genAI.getGenerativeModel({ 
-      model: 'gemini-flash-latest',
-      tools: [searchTool]
+    this.searchModel = genAI.getGenerativeModel({
+      model: "gemini-flash-latest",
+      tools: [searchTool as any],
     });
   }
 
   /**
    * Analyze product image using Gemini Vision
    */
-  async analyzeProductImage(imageUrl: string, prompt?: string): Promise<any> {
+  async analyzeProductImage(
+    imageUrl: string,
+    prompt?: string
+  ): Promise<ProductAnalysis> {
     const defaultPrompt = `
     Analyze this product image and provide comprehensive inventory management data:
     
@@ -152,32 +170,36 @@ export class GeminiService {
         prompt || defaultPrompt,
         {
           inlineData: {
-            data: imageUrl.split(',')[1], // Remove data:image/jpeg;base64, prefix
-            mimeType: 'image/jpeg'
-          }
-        }
+            data: imageUrl.split(",")[1], // Remove data:image/jpeg;base64, prefix
+            mimeType: "image/jpeg",
+          },
+        },
       ]);
-      
-      const response = await result.response;
+
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
-      
+
       return { analysis: text };
     } catch (error) {
-      console.error('Error analyzing image with Gemini:', error);
-      throw new Error('Failed to analyze image with Gemini');
+      console.error("Error analyzing image with Gemini:", error);
+      throw new Error("Failed to analyze image with Gemini");
     }
   }
 
   /**
    * Search for current market information using grounded search
    */
-  async searchMarketData(productName: string, brand?: string, model?: string): Promise<any> {
-    const searchQuery = [productName, brand, model].filter(Boolean).join(' ');
+  async searchMarketData(
+    productName: string,
+    brand?: string,
+    model?: string
+  ): Promise<MarketData> {
+    const searchQuery = [productName, brand, model].filter(Boolean).join(" ");
     const prompt = `
     Search for current market information about: "${searchQuery}"
     
@@ -199,18 +221,18 @@ export class GeminiService {
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
-      
+
       return { marketData: text };
     } catch (error) {
-      console.error('Error searching market data with Gemini:', error);
-      throw new Error('Failed to search market data with Gemini');
+      console.error("Error searching market data with Gemini:", error);
+      throw new Error("Failed to search market data with Gemini");
     }
   }
 
@@ -238,18 +260,18 @@ export class GeminiService {
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
-      
+
       return { urlAnalysis: text };
     } catch (error) {
-      console.error('Error analyzing URL with Gemini:', error);
-      throw new Error('Failed to analyze URL with Gemini');
+      console.error("Error analyzing URL with Gemini:", error);
+      throw new Error("Failed to analyze URL with Gemini");
     }
   }
 
@@ -263,9 +285,9 @@ export class GeminiService {
       category?: string;
       brand?: string;
       condition?: string;
-      aiIdentification?: any;
+      aiIdentification?: AIIdentification;
     },
-    marketData?: any
+    marketData?: MarketData
   ): Promise<GeminiAnalysis> {
     // First, search for current market information if not provided
     let enhancedMarketData = marketData;
@@ -276,7 +298,7 @@ export class GeminiService {
           productData.brand
         );
       } catch (error) {
-        console.warn('Could not fetch market data:', error);
+        console.warn("Could not fetch market data:", error);
       }
     }
 
@@ -284,15 +306,19 @@ export class GeminiService {
 As an expert e-commerce product analyst with access to current market data, analyze the following product and generate comprehensive inventory management data with SEO optimization and platform-specific categories:
 
 Product Information:
-- Title: ${productData.title || 'Unknown'}
-- Description: ${productData.description || 'None provided'}
-- Category: ${productData.category || 'Unknown'}
-- Brand: ${productData.brand || 'Unknown'}
-- Condition: ${productData.condition || 'Unknown'}
+- Title: ${productData.title || "Unknown"}
+- Description: ${productData.description || "None provided"}
+- Category: ${productData.category || "Unknown"}
+- Brand: ${productData.brand || "Unknown"}
+- Condition: ${productData.condition || "Unknown"}
 - AI Identification: ${JSON.stringify(productData.aiIdentification || {})}
 
 Market Data:
-${enhancedMarketData ? JSON.stringify(enhancedMarketData, null, 2) : 'No market data available'}
+${
+  enhancedMarketData
+    ? JSON.stringify(enhancedMarketData, null, 2)
+    : "No market data available"
+}
 
 Search for additional current market trends and competitor analysis for this product type to enhance your recommendations.
 
@@ -398,19 +424,19 @@ Respond only with valid JSON containing ALL required fields.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
+
       // Clean up the response to extract JSON
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (!jsonMatch) {
-        throw new Error('No valid JSON found in response');
+        throw new Error("No valid JSON found in response");
       }
-      
+
       return JSON.parse(jsonMatch[0]);
     } catch (error) {
-      console.error('Error analyzing product with Gemini:', error);
-      throw new Error('Failed to analyze product with Gemini');
+      console.error("Error analyzing product with Gemini:", error);
+      throw new Error("Failed to analyze product with Gemini");
     }
   }
 
@@ -427,7 +453,7 @@ Respond only with valid JSON containing ALL required fields.`;
     marketData: any,
     userPreferences?: {
       targetMargin?: number;
-      pricingStrategy?: 'competitive' | 'premium' | 'budget';
+      pricingStrategy?: "competitive" | "premium" | "budget";
     }
   ): Promise<PriceAnalysis> {
     // Enhance market data with current search if needed
@@ -440,10 +466,10 @@ Respond only with valid JSON containing ALL required fields.`;
         );
         enhancedMarketData = {
           ...marketData,
-          searchEnhanced: searchData
+          searchEnhanced: searchData,
         };
       } catch (error) {
-        console.warn('Could not enhance market data with search:', error);
+        console.warn("Could not enhance market data with search:", error);
       }
     }
 
@@ -451,10 +477,10 @@ Respond only with valid JSON containing ALL required fields.`;
 As a pricing expert with access to current market data, analyze the following product and recommend an optimal price:
 
 Product Information:
-- Title: ${productData.title || 'Unknown'}
-- Condition: ${productData.condition || 'Unknown'}
-- Category: ${productData.category || 'Unknown'}
-- Brand: ${productData.brand || 'Unknown'}
+- Title: ${productData.title || "Unknown"}
+- Condition: ${productData.condition || "Unknown"}
+- Category: ${productData.category || "Unknown"}
+- Brand: ${productData.brand || "Unknown"}
 
 Market Data:
 ${JSON.stringify(enhancedMarketData, null, 2)}
@@ -462,8 +488,8 @@ ${JSON.stringify(enhancedMarketData, null, 2)}
 Search for additional current pricing trends and competitive analysis for similar products to enhance your pricing recommendation.
 
 User Preferences:
-- Target Margin: ${userPreferences?.targetMargin || 'Not specified'}%
-- Pricing Strategy: ${userPreferences?.pricingStrategy || 'competitive'}
+- Target Margin: ${userPreferences?.targetMargin || "Not specified"}%
+- Pricing Strategy: ${userPreferences?.pricingStrategy || "competitive"}
 
 Please analyze the market data and provide a JSON response with:
 {
@@ -491,18 +517,18 @@ Respond only with valid JSON.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (!jsonMatch) {
-        throw new Error('No valid JSON found in response');
+        throw new Error("No valid JSON found in response");
       }
-      
+
       return JSON.parse(jsonMatch[0]);
     } catch (error) {
-      console.error('Error analyzing pricing with Gemini:', error);
-      throw new Error('Failed to analyze pricing with Gemini');
+      console.error("Error analyzing pricing with Gemini:", error);
+      throw new Error("Failed to analyze pricing with Gemini");
     }
   }
 
@@ -532,19 +558,19 @@ Respond only with valid JSON array.`;
 
     try {
       const result = await this.textModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\[[\s\S]*\]/);
+
+      const jsonMatch = /\[[\s\S]*\]/.exec(text);
       if (!jsonMatch) {
-        throw new Error('No valid JSON array found in response');
+        throw new Error("No valid JSON array found in response");
       }
-      
+
       return JSON.parse(jsonMatch[0]);
     } catch (error) {
-      console.error('Error generating search queries with Gemini:', error);
+      console.error("Error generating search queries with Gemini:", error);
       // Fallback to basic queries
-      return ['product search query'];
+      return ["product search query"];
     }
   }
 
@@ -555,7 +581,7 @@ Respond only with valid JSON array.`;
     productData: any,
     marketData: any
   ): Promise<{
-    direction: 'up' | 'down' | 'stable';
+    direction: "up" | "down" | "stable";
     confidence: number;
     factors: string[];
   }> {
@@ -587,21 +613,21 @@ Respond only with valid JSON.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (!jsonMatch) {
-        throw new Error('No valid JSON found in response');
+        throw new Error("No valid JSON found in response");
       }
-      
+
       return JSON.parse(jsonMatch[0]);
     } catch (error) {
-      console.error('Error analyzing market trends with Gemini:', error);
+      console.error("Error analyzing market trends with Gemini:", error);
       return {
-        direction: 'stable' as const,
+        direction: "stable" as const,
         confidence: 0.5,
-        factors: ['Insufficient data for trend analysis']
+        factors: ["Insufficient data for trend analysis"],
       };
     }
   }
@@ -659,18 +685,18 @@ Respond only with valid JSON.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (!jsonMatch) {
-        throw new Error('No valid JSON found in response');
+        throw new Error("No valid JSON found in response");
       }
-      
+
       return JSON.parse(jsonMatch[0]);
     } catch (error) {
-      console.error('Error compiling market analysis with Gemini:', error);
-      throw new Error('Failed to compile market analysis with Gemini');
+      console.error("Error compiling market analysis with Gemini:", error);
+      throw new Error("Failed to compile market analysis with Gemini");
     }
   }
 
@@ -679,7 +705,7 @@ Respond only with valid JSON.`;
    */
   async generatePlatformListing(
     productData: any,
-    targetPlatform: 'ebay' | 'facebook' | 'shopify' | 'amazon'
+    targetPlatform: "ebay" | "facebook" | "shopify" | "amazon"
   ): Promise<any> {
     const prompt = `
     Search for current best practices and successful listing strategies for ${targetPlatform} and generate optimized listing content for this product:
@@ -704,18 +730,18 @@ Respond only with valid JSON.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
-      
+
       return { platformContent: text };
     } catch (error) {
-      console.error('Error generating platform listing with Gemini:', error);
-      throw new Error('Failed to generate platform listing with Gemini');
+      console.error("Error generating platform listing with Gemini:", error);
+      throw new Error("Failed to generate platform listing with Gemini");
     }
   }
 
@@ -724,16 +750,20 @@ Respond only with valid JSON.`;
    */
   async researchCompetitors(
     productData: any,
-    targetPlatforms: string[] = ['ebay', 'facebook', 'amazon']
+    targetPlatforms: string[] = ["ebay", "facebook", "amazon"]
   ): Promise<any> {
-    const searchQuery = [productData.title, productData.brand, productData.category]
+    const searchQuery = [
+      productData.title,
+      productData.brand,
+      productData.category,
+    ]
       .filter(Boolean)
-      .join(' ');
+      .join(" ");
 
     const prompt = `
     Research competitor strategies and market positioning for: "${searchQuery}"
     
-    Focus on these platforms: ${targetPlatforms.join(', ')}
+    Focus on these platforms: ${targetPlatforms.join(", ")}
     
     Provide comprehensive competitive analysis including:
     1. Top competitors and their pricing strategies
@@ -752,18 +782,18 @@ Respond only with valid JSON.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
-      
+
       return { competitorAnalysis: text };
     } catch (error) {
-      console.error('Error researching competitors with Gemini:', error);
-      throw new Error('Failed to research competitors with Gemini');
+      console.error("Error researching competitors with Gemini:", error);
+      throw new Error("Failed to research competitors with Gemini");
     }
   }
 
@@ -772,7 +802,9 @@ Respond only with valid JSON.`;
    */
   async generateSEOContent(productData: any): Promise<any> {
     const prompt = `
-    Research current SEO trends and search patterns for products like: "${productData.title || productData.category}"
+    Research current SEO trends and search patterns for products like: "${
+      productData.title || productData.category
+    }"
     
     Product Information:
     ${JSON.stringify(productData, null, 2)}
@@ -795,18 +827,18 @@ Respond only with valid JSON.`;
 
     try {
       const result = await this.searchModel.generateContent(prompt);
-      const response = await result.response;
+      const response = result.response;
       const text = response.text();
-      
-      const jsonMatch = text.match(/\{[\s\S]*\}/);
+
+      const jsonMatch = /\{[\s\S]*\}/.exec(text);
       if (jsonMatch) {
         return JSON.parse(jsonMatch[0]);
       }
-      
+
       return { seoContent: text };
     } catch (error) {
-      console.error('Error generating SEO content with Gemini:', error);
-      throw new Error('Failed to generate SEO content with Gemini');
+      console.error("Error generating SEO content with Gemini:", error);
+      throw new Error("Failed to generate SEO content with Gemini");
     }
   }
 }
